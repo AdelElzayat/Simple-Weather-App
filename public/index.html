@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App - Country Weather & Geolocation</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-cloud-sun"></i>
+      </div>
+      <h1>Weather App</h1>
+      <p class="subtitle">Get real-time weather & geolocation data for any country</p>
+    </header>
+
+    <div class="search-section">
+      <div class="input-group">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="countryInput" placeholder="Enter a country name (e.g., Egypt, Japan, Brazil)..." autocomplete="off">
+        <button id="getWeatherBtn">
+          <i class="fas fa-cloud-sun"></i>
+          Get Weather
+        </button>
+      </div>
+      <div class="suggestions-box" id="suggestionsBox"></div>
+    </div>
+
+    <div id="loadingSpinner" class="loading-spinner hidden">
+      <div class="spinner"></div>
+      <p>Fetching weather data...</p>
+    </div>
+
+    <div id="errorMessage" class="error-message hidden">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="errorText"></span>
+    </div>
+
+    <div id="resultsContainer" class="results-container hidden">
+      <div class="results-grid">
+        <div class="result-card country-card">
+          <div class="card-header">
+            <i class="fas fa-globe-americas"></i>
+            <h3>Country Info</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span class="info-label">Country</span>
+              <span class="info-value" id="countryName">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Capital</span>
+              <span class="info-value" id="capitalName">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Country Code</span>
+              <span class="info-value" id="countryCode">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card geo-card">
+          <div class="card-header">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Geolocation</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span class="info-label">Latitude</span>
+              <span class="info-value" id="latitude">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Longitude</span>
+              <span class="info-value" id="longitude">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card temp-card">
+          <div class="card-header">
+            <i class="fas fa-temperature-high"></i>
+            <h3>Temperature</h3>
+          </div>
+          <div class="card-body">
+            <div class="temp-main">
+              <span id="tempIcon" class="weather-icon"></span>
+              <span class="temp-value" id="temperature">--°C</span>
+            </div>
+            <div class="temp-details">
+              <div class="info-row">
+                <span class="info-label">Feels Like</span>
+                <span class="info-value" id="feelsLike">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Min / Max</span>
+                <span class="info-value" id="tempMinMax">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Description</span>
+                <span class="info-value" id="weatherDesc">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card atmosphere-card">
+          <div class="card-header">
+            <i class="fas fa-wind"></i>
+            <h3>Atmosphere</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span class="info-label">Humidity</span>
+              <span class="info-value" id="humidity">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Pressure</span>
+              <span class="info-value" id="pressure">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Wind Speed</span>
+              <span class="info-value" id="windSpeed">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Cloudiness</span>
+              <span class="info-value" id="cloudiness">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Visibility</span>
+              <span class="info-value" id="visibility">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card extra-card">
+          <div class="card-header">
+            <i class="fas fa-clock"></i>
+            <h3>Additional Info</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span class="info-label">Sunrise</span>
+              <span class="info-value" id="sunrise">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Sunset</span>
+              <span class="info-value" id="sunset">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Wind Direction</span>
+              <span class="info-value" id="windDirection">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
